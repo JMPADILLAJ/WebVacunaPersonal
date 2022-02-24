@@ -1,0 +1,118 @@
+﻿
+
+@{
+    ViewBag.Title = "IndexEmpleado";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    farma_Web.Models.Empleado empleado = ViewBag.Empleado;
+}
+
+<h1>Bienvenido @empleado.nombres @empleado.apellidos</h1>
+<br />
+<h3>Esta es la ventana de actualización de datos</h3><br />
+
+<section class="py-3">
+    <div class="row justify-content-center h-100">
+        <div class="col-md-9">
+            <form action="~/Empleado/ActualizarEmpleado" method="post">
+                <input type="hidden" id="id_empleado"  name="id_empleado" value="@empleado.id_empleado" />
+                <div class="form-horizontal col-md-12">
+                    <div class="form-group">
+                        <label for="nombres" class="col-md-3 control-label">Nombres:</label>
+                        <div class="col-md-3 has-search">
+                            <input type="text" id="nombres" class="form-control" name="nombres" placeholder="@empleado.nombres" style="width:250px!important" pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" title="Solo se permiten letras"/>
+
+                        </div>
+
+                        <label for="apellidos" class="col-md-3 control-label">Apellidos:</label>
+                        <div class="col-md-3 has-search">
+                            <input type="text" id="apellidos" required class="form-control" name="apellidos" placeholder="@empleado.apellidos" style="width:250px!important" pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" title="Solo se permiten letras"/>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="cedula" class="col-md-3 control-label">Cédula:</label>
+                        <div class="col-md-3 has-search">
+                            <input type="hidden" id="cedula" name="cedula"  value="@empleado.cedula" />
+                            <input type="text" id="cedula2" class="form-control" name="cedula2" placeholder="@empleado.cedula" value="@empleado.cedula" style="width:250px!important" disabled />
+                        </div>
+
+                        <label for="Correo" class="col-md-3 control-label">Correo:</label>
+                        <div class="col-md-3 has-search">
+                            <input type="email" id="correo" required class="form-control" name="correo" placeholder="@empleado.correo" style="width:250px!important" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cedula" class="col-md-3 control-label" >Fecha Nacimiento:</label>
+                        <div class="col-md-3 has-search">
+                   
+                            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control" value="2020-01-01" min="1900-01-01" max="2022-12-31" style="width:200px!important;" />
+                        </div>
+
+                        <label for="Correo" class="col-md-3 control-label" >Dirección domicilio:</label>
+                        <div class="col-md-3 has-search">
+                            <input type="text" id="direccion_domicilio" required class="form-control" name="direccion_domicilio" placeholder="Ejm: Ambato Av. Indoamerica" style="width:250px!important;"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cedula" class="col-md-3 control-label">Teléfono:</label>
+                        <div class="col-md-3 has-search">
+                            <input type="text" id="telefono" required class="form-control" name="telefono" placeholder="Ejm: 0991309724" style="width:250px!important" maxlength="10" pattern="\d{10}" title="Solo se permiten números y máximo 10."/>
+                        </div>
+
+                        <label for="Correo" class="col-md-3 control-label">Estado vacuna:</label>
+                        <div class="col-md-3 has-search">
+                            <select required id="estado_vacuna" class="form-control" name="estado_vacuna" style="width:250px!important" >
+                                <option value="0">Sí está vacunado</option>
+                                <option value="1">No está vacunado</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cedula" class="col-md-3 control-label">Tipo vacuna:</label>
+                        <div class="col-md-3 has-search">
+                            <select required id="tipo_vacuna" class="form-control" name="tipo_vacuna" style="width:250px!important" >
+                                <option value="Sputnik">Sputnik</option>
+                                <option value="AstraZeneca">Astra Zeneca</option>
+                                <option value="Jhonson&Jhonson ">Jhonson & Jhonson </option>
+                                <option value="Pfizer">Pfizer</option>
+                            </select>
+                        </div>
+
+                        <label for="Correo" class="col-md-3 control-label">Fecha vacuna:</label>
+                        <div class="col-md-3 has-search">
+                            <input type="date" id="fecha_vacuna" name="fecha_vacuna" class="form-control" value="2020-01-01" min="2018-01-01" max="2022-12-31" style="width:200px!important" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cedula" class="col-md-3 control-label">Numero de dosis:</label>
+                        <div class="col-md-3 has-search">
+                            <input type="number" id="numero_dosis" required class="form-control" name="numero_dosis" placeholder="Ejm: 1" style="width:250px!important" min="1" max="4"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+
+                        <div class="col-md-6 has-search">
+                            <button class="btn-success" type="submit" style="width:350px!important;height:40px; border-radius:5px">Actualizar</button>
+                        </div>
+                        @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+                        {
+                            <div class="col-md-6 has-search   text-center text-muted mensaje" style="height:30px; margin-top:10px; text-align:left">
+                                <label>@ViewBag.Mensaje</label>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </form>
+        </div>
+        </div>
+</section>
+
+

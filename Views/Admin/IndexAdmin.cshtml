@@ -1,0 +1,173 @@
+﻿
+@{
+    ViewBag.Title = "IndexAdmin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+
+    List<farma_Web.Models.Empleado> ListaEmpleados = ViewBag.listaEmpleados;
+
+}
+
+<div>
+    <center><h1> Ventana de Administrador</h1></center>
+
+    <section class="py-3">
+        <div class="row  h-100">
+            <div class="col-md-9">
+                <form action="~/Admin/AgregarEmpleado" method="post">
+                    <h2>Ingreso de Empleados</h2>
+                    <div class="form-horizontal col-md-12">
+                        <div class="form-group">
+                            <label for="nombres" class="col-md-3 control-label">Nombres:</label>
+                            <div class="col-md-3 has-search">
+                                <input type="text" id="nombres" required class="form-control" name="nombres" placeholder="Ejm: José Miguel" style="width:270px!important" pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" title="Solo se permiten letras"/>
+                            </div>
+
+                            <label for="apellidos" class="col-md-3 control-label">Apellidos:</label>
+                            <div class="col-md-3 has-search">
+                                <input type="text" id="apellidos" required class="form-control" name="apellidos" placeholder="Ejm: Padilla Jaramillo" style="width:270px!important" pattern="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" title="Solo se permiten letras"/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="nombre" class="col-md-3 control-label">Cédula:</label>
+                            <div class="col-md-3 has-search">
+                                <input type="text" id="cedula" required class="form-control" name="cedula" placeholder="Ejm: 1724433387" style="width:270px!important" />
+                            </div>
+
+                            <label for="Correo" class="col-md-3 control-label">Correo:</label>
+                            <div class="col-md-3 has-search">
+                                <input type="email" id="correo" required class="form-control" name="correo" placeholder="Ejm: jmpadillaj@hotmail.com" style="width:270px!important" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-md-6 has-search">
+                                <button class="btn-success" type="submit" style="width:350px!important;height:40px; border-radius:5px">Crear</button>
+                            </div>
+                            @if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+                            {
+                                <div class="col-md-6 has-search   text-center text-muted mensaje" style="height:30px; margin-top:10px; text-align:left">
+                                    <label>@ViewBag.Mensaje</label>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+    <br />
+    <h2>Sección de busqueda</h2>
+    <div class="form-horizontal col-md-12">
+        <div class="form-group">
+            <form action="~/Admin/ListaEmpleadosEstadoVacuna" method="post">
+                <label for="nombres" class="col-md-2 control-label">Estado de vacuna</label>
+                <div class="col-md-4 has-search">
+                    <select required id="estado_vacuna" class="form-control" name="estado_vacuna">
+                        <option value="0">Sí está vacunado</option>
+                        <option value="1">No está vacunado</option>
+                    </select>
+                </div>
+                <div class="col-md-6 has-search" style="text-align:left">
+                    <button class="btn-success" type="submit" style="width:100px!important;height:40px; border-radius:5px">Buscar</button>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="form-group">
+            <form action="~/Admin/ListaEmpleadosTipoVacuna" method="post">
+                <label for="nombres" class="col-md-2 control-label">Tipo de vacuna</label>
+                <div class="col-md-4 has-search">
+                    <select required id="tipo_vacuna" class="form-control" name="tipo_vacuna">
+                        <option value="Sputnik">Sputnik</option>
+                        <option value="AstraZeneca">Astra Zeneca</option>
+                        <option value="Jhonson&Jhonson ">Jhonson & Jhonson </option>
+                        <option value="Pfizer">Pfizer</option>
+                    </select>
+                </div>
+                <div class="col-md-6 has-search" style="text-align:left">
+                    <button class="btn-success" type="submit" style="width:100px!important;height:40px; border-radius:5px">Buscar</button>
+                </div>
+                </form>
+        </div>
+
+        <div class="form-group">
+            <form action="~/Admin/ListaEmpleadosFechaVacuna" method="post">
+                <label for="nombres" class="col-md-2 control-label">Fecha de vacuna</label>
+                <div class="col-md-4 has-search">
+
+                    <input type="date" id="fecha_vacuna" name="fecha_vacuna" class="form-control" value="2020-01-01" min="2018-01-01" max="2022-12-31" />
+                </div>
+                <div class="col-md-6 has-search" style="text-align:left">
+                    <button class="btn-success" type="submit" style="width:100px!important;height:40px; border-radius:5px">Buscar</button>
+                </div>
+                </form>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped " border="1" align="center">
+        <thead>
+            <tr>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Cédula</th>
+                <th>Correo</th>
+                <th>Fecha Nacimiento</th>
+                <th>Dirección</th>
+                <th>Vacunado</th>
+                <th>Tipo de vacuna </th>
+                <th>Fecha de vacuna</th>
+                <th>Nro. de dosis</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var e in ListaEmpleados)
+            {
+
+                <tr>
+                    <td>@e.nombres</td>
+                    <td>@e.apellidos</td>
+                    <td>@e.cedula</td>
+                    <td>@e.correo</td>
+                    <td>@e.fecha_nacimiento</td>
+                    <td>@e.direccion_domicilio</td>
+                    @if (@e.estado_vacuna == 0)
+                    {
+                        <td>Sí</td>
+                    }
+                    else
+                    {
+                        <td>No</td>
+                    }
+                    <td>@e.tipo_vacuna</td>
+                    <td>@e.fecha_vacuna</td>
+                    <td>@e.numero_dosis</td>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        setTimeout(function () {
+            $(".mensaje").fadeOut(3500);
+        }, 5000);
+
+
+    });
+</script>
